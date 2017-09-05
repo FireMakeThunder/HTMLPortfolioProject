@@ -5,35 +5,62 @@ $(function() {
     dataType: 'jsonp',
     success: function(response) {
       console.log('response', response);
-      console.log(response.courses.completed);
       addCourses(response.courses.completed);
+      addBadges(response.badges)
     }
   })
 
+  function addBadges(badges) {
+    var $plainBadges = $('#plainBadges');
+
+    badges.forEach(function(badge) {
+      var $badge = $('<div />', {
+        'class': 'course'
+      }).appendTo($plainBadges)
+
+
+      $('<h3 />', {
+        text: badge.name
+      }).appendTo($badge);
+
+      $('<img />', {
+        src: badge.badge
+      }).appendTo($badge);
+
+      $('<a />', {
+        'class': 'btn btn-primary',
+        target: '_blank',
+        href: badge.course_url,
+        text: 'See Course'
+      }).appendTo($badge);
+
+    });
+  }
+
   function addCourses(courses) {
 
-    var $badges = $('#badges');
+    var $courseBadges = $('#courseBadges');
 
     courses.forEach(function(course) {
 
-      var $course = $('<div />', {
+      var $badge = $('<div />', {
         'class': 'course'
-      }).appendTo($badges);
+      }).appendTo($courseBadges);
 
       $('<h3 />', {
         text: course.title
-      }).appendTo($course);
+      }).appendTo($badge);
 
       $('<img />', {
         src: course.badge
-      }).appendTo($course);
+      }).appendTo($badge);
 
       $('<a />', {
         'class': 'btn btn-primary',
         target: '_blank',
         href: course.url,
         text: 'See Course'
-      }).appendTo($course);
+      }).appendTo($badge);
 
     });
   }

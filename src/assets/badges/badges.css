@@ -4,7 +4,11 @@ body {
   font-size: 18px;
 }
 
-#badges {
+#plainBadges {
+  text-align: center;
+}
+
+#courseBadges {
   text-align: center;
 }
 
